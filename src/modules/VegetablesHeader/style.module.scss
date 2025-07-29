@@ -16,3 +16,9 @@
     padding: 10px 40px;
   }
 }
+
+.root {
+  &:hover {
+    background-color: #3b944e;
+  }
+}

@@ -12,6 +12,9 @@ export const VegetablesHeader = () => {
         color="#54b46a"
         rightSection={<Cart width={20} height={20} />}
         radius="md"
+        classNames={{
+          root: style.root,
+        }}
         className={style.button}
       >
         Cart
