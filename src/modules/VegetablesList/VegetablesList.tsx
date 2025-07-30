@@ -1,54 +1,34 @@
+import { useEffect, useState } from "react";
 import { Vegetable } from "../../components/Vegetable/Vegetable";
 import style from "./style.module.scss";
+import ky from "ky";
+
+interface Data {
+  id: number;
+  name: string;
+  price: number;
+  image: string;
+  category: string;
+}
 
 export const VegetablesList = () => {
-  const vegs = [
-    {
-      id: 1,
-      name: "Brocollu - 1 Kg",
-      price: 120,
-      image:
-        "https://res.cloudinary.com/sivadass/image/upload/v1493620046/dummy-products/broccoli.jpg",
-      category: "vegetables",
-    },
-    {
-      id: 2,
-      name: "Brocollu - 1 Kg",
-      price: 120,
-      image:
-        "https://res.cloudinary.com/sivadass/image/upload/v1493620046/dummy-products/broccoli.jpg",
-      category: "vegetables",
-    },
-    {
-      id: 3,
-      name: "Brocollu - 1 Kg",
-      price: 120,
-      image:
-        "https://res.cloudinary.com/sivadass/image/upload/v1493620046/dummy-products/broccoli.jpg",
-      category: "vegetables",
-    },
-    {
-      id: 4,
-      name: "Brocollu - 1 Kg",
-      price: 120,
-      image:
-        "https://res.cloudinary.com/sivadass/image/upload/v1493620046/dummy-products/broccoli.jpg",
-      category: "vegetables",
-    },
-    {
-      id: 5,
-      name: "Brocollu - 1 Kg",
-      price: 120,
-      image:
-        "https://res.cloudinary.com/sivadass/image/upload/v1493620046/dummy-products/broccoli.jpg",
-      category: "vegetables",
-    },
-  ];
+  const [data, setData] = useState<Data[]>([]);
+  const loadData = async () => {
+    const vegs: Data[] = await ky
+      .get(
+        "https://res.cloudinary.com/sivadass/raw/upload/v1535817394/json/products.json"
+      )
+      .json();
+    setData(vegs);
+  };
+  useEffect(() => {
+    loadData();
+  }, []);
   return (
     <section className={style.container}>
       <h2 className={style.title}>Catalog</h2>
       <div className={style.list}>
-        {vegs.map((item) => {
+        {data.map((item) => {
           return (
             <Vegetable
               key={item.id}

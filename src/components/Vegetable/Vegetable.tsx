@@ -1,6 +1,8 @@
-import { ActionIcon } from "@mantine/core";
+import { ActionIcon, Button } from "@mantine/core";
 import style from "./style.module.scss";
 import Add from "../../assets/add.svg?react";
+import Subtract from "../../assets/subtract.svg?react";
+import Cart from "../../assets/greencart.svg?react";
 
 interface VegetableProps {
   id: number;
@@ -19,6 +21,14 @@ export const Vegetable = ({ id, name, price, image }: VegetableProps) => {
           <p className={style.weight}>{name.slice(name.indexOf("-") + 2)}</p>
         </div>
         <div className={style.amount}>
+          <ActionIcon
+            variant="filled"
+            aria-label="Subtract"
+            size={30}
+            color="#dee2e6"
+          >
+            <Subtract width={12} height={12} />
+          </ActionIcon>
           <input type="number" value="1" className={style.input} />
           <ActionIcon
             variant="filled"
@@ -30,7 +40,21 @@ export const Vegetable = ({ id, name, price, image }: VegetableProps) => {
           </ActionIcon>
         </div>
       </div>
-      <p>{price}</p>
+      <div className={style.bottom}>
+        <p className={style.price}>{`$ ${price}`}</p>
+        <Button
+          variant="filled"
+          color="#e7faeb"
+          rightSection={<Cart width={20} height={20} />}
+          radius="md"
+          classNames={{
+            root: style.root,
+          }}
+          className={style.button}
+        >
+          Add to cart
+        </Button>
+      </div>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 .card {
   width: 302px;
-  height: 414px;
+  height: 424px;
   padding: 16px;
   background-color: #fff;
   border-radius: 24px;
@@ -47,6 +47,10 @@
         text-align: center;
         color: #212529;
 
+        &:hover {
+          background-color: #dee2e6;
+        }
+
         &:focus {
           outline: none;
           background-color: #868e96;
@@ -54,5 +58,38 @@
         }
       }
     }
+  }
+
+  .bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .price {
+      margin: 0;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 120%;
+      color: #212529;
+    }
+
+    .button {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 150%;
+      color: #3b944e;
+      width: 204px;
+      height: 44px;
+      padding: 10px 40px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+}
+
+.root {
+  &:hover {
+    background-color: #d6f0dc;
   }
 }
