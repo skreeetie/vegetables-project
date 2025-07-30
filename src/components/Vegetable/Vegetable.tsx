@@ -3,6 +3,9 @@ import style from "./style.module.scss";
 import Add from "../../assets/add.svg?react";
 import Subtract from "../../assets/subtract.svg?react";
 import Cart from "../../assets/greencart.svg?react";
+import { useAmount } from "../../hooks/useAmount";
+import { useContext } from "react";
+import { CartList } from "../../context/CartList";
 
 interface VegetableProps {
   id: number;
@@ -12,6 +15,8 @@ interface VegetableProps {
 }
 
 export const Vegetable = ({ id, name, price, image }: VegetableProps) => {
+  const [amount, setAmount] = useAmount(1);
+  const { setCartList } = useContext(CartList);
   return (
     <div key={id} className={style.card}>
       <img src={image} width={276} height={276} alt={name} />
@@ -26,22 +31,29 @@ export const Vegetable = ({ id, name, price, image }: VegetableProps) => {
             aria-label="Subtract"
             size={30}
             color="#dee2e6"
+            onClick={() => setAmount(Number(amount) - 1)}
           >
             <Subtract width={12} height={12} />
           </ActionIcon>
-          <input type="number" value="1" className={style.input} />
+          <input
+            type="number"
+            value={`${amount}`}
+            className={style.input}
+            onChange={(e) => setAmount(e.target.value)}
+          />
           <ActionIcon
             variant="filled"
             aria-label="Add"
             size={30}
             color="#dee2e6"
+            onClick={() => setAmount(Number(amount) + 1)}
           >
             <Add width={12} height={12} />
           </ActionIcon>
         </div>
       </div>
       <div className={style.bottom}>
-        <p className={style.price}>{`$ ${price}`}</p>
+        <p className={style.price}>{`$ ${price * Number(amount)}`}</p>
         <Button
           variant="filled"
           color="#e7faeb"
@@ -51,6 +63,22 @@ export const Vegetable = ({ id, name, price, image }: VegetableProps) => {
             root: style.root,
           }}
           className={style.button}
+          onClick={() => {
+            if (setCartList) {
+              setCartList((prev) => {
+                return [
+                  ...prev,
+                  {
+                    id: id,
+                    name: name,
+                    count: Number(amount),
+                    price: price,
+                    image: image,
+                  },
+                ];
+              });
+            }
+          }}
         >
           Add to cart
         </Button>

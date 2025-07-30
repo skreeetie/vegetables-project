@@ -5,6 +5,9 @@
   background-color: #fff;
   height: 59px;
   padding: 0 20px;
+  position: fixed;
+  width: 100%;
+  z-index: 99;
 
   .button {
     font-size: 16px;
