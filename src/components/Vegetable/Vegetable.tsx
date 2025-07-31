@@ -16,7 +16,7 @@ interface VegetableProps {
 
 export const Vegetable = ({ id, name, price, image }: VegetableProps) => {
   const [amount, setAmount] = useAmount(1);
-  const { setCartList } = useContext(CartList);
+  const { cartList, setCartList } = useContext(CartList);
   return (
     <div key={id} className={style.card}>
       <img src={image} width={276} height={276} alt={name} />
@@ -64,7 +64,11 @@ export const Vegetable = ({ id, name, price, image }: VegetableProps) => {
           }}
           className={style.button}
           onClick={() => {
-            if (setCartList) {
+            if (
+              setCartList &&
+              cartList &&
+              !cartList.find((item) => item.id === id)
+            ) {
               setCartList((prev) => {
                 return [
                   ...prev,

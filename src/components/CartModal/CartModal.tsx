@@ -30,7 +30,7 @@ export const CartModal = () => {
           )}`}</p>
         </div>
       ) : (
-        <p>Something's missing</p>
+        <p className={style.empty}>Cart is empty</p>
       )}
     </div>
   );
