@@ -29,6 +29,7 @@ export const Vegetable = ({ id, name, price, image }: VegetableProps) => {
           <ActionIcon
             variant="filled"
             aria-label="Subtract"
+            data-testid="subtract"
             size={30}
             color="#dee2e6"
             onClick={() => setAmount(Number(amount) - 1)}
@@ -44,6 +45,7 @@ export const Vegetable = ({ id, name, price, image }: VegetableProps) => {
           <ActionIcon
             variant="filled"
             aria-label="Add"
+            data-testid="add"
             size={30}
             color="#dee2e6"
             onClick={() => setAmount(Number(amount) + 1)}
