@@ -83,6 +83,28 @@ export const Vegetable = ({ id, name, price, image }: VegetableProps) => {
                   },
                 ];
               });
+            } else if (
+              setCartList &&
+              cartList &&
+              cartList.find((item) => item.id === id)
+            ) {
+              setCartList((prev) => {
+                const count = prev.find((item) => item.id === id)?.count;
+                const newList = prev.filter((item) => item.id !== id);
+                if (count) {
+                  return [
+                    ...newList,
+                    {
+                      id: id,
+                      name: name,
+                      count: Number(amount) + count,
+                      price: price,
+                      image: image,
+                    },
+                  ];
+                }
+                return [...prev];
+              });
             }
           }}
         >

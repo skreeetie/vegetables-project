@@ -4,6 +4,7 @@ import Add from "../../assets/add.svg?react";
 import style from "./style.module.scss";
 import { useAmount } from "../../hooks/useAmount";
 import type { CartItem } from "../../context/CartList";
+import { useEffect } from "react";
 
 interface ModalProps {
   id: number;
@@ -23,6 +24,9 @@ export const ModalCard = ({
   setCartList,
 }: ModalProps) => {
   const [amount, setAmount] = useAmount(count);
+  useEffect(() => {
+    setAmount(count);
+  }, [count, setAmount]);
   return (
     <div key={id} className={style.item}>
       <div className={style.info}>
